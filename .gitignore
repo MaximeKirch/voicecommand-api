@@ -1,0 +1,37 @@
+# --- DEPENDENCIES ---
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.so
+
+# --- SECURITY  ---
+.env
+.env.local
+*.pem
+*.key
+
+# --- OS & IDE JUNK ---
+.DS_Store
+.idea/
+.vscode/
+Thumbs.db
+
+# --- DOCKER ---
+docker-data/
+
+# --- APP SPECIFIC ---
+# On ignore les fichiers mp3 de test
+*.mp3
+*.wav
+*.m4a
+
+api-gateway/uploads/*
+!api-gateway/uploads/.gitkeep
+
+# Fichiers temporaires
+temp_*

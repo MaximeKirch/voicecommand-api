@@ -1,0 +1,26 @@
+services:
+  # Service 1 : IA (Python)
+  ai-engine:
+    build: ./ai-engine
+    container_name: voice_ai_engine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai-engine:/app
+    environment:
+      - MODEL_TYPE=small
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+
+  # Service 2 : API Gateway (Node)
+  api-gateway:
+    build: ./api-gateway
+    container_name: voice_api_gateway
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api-gateway:/app
+      - /app/node_modules
+    depends_on:
+      - ai-engine
+    environment:
+      - AI_SERVICE_URL=${AI_SERVICE_URL}
