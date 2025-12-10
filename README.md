@@ -118,16 +118,24 @@ curl -X POST http://localhost:3000/process-voice \
 
 ```text
 .
-├── docker-compose.yml      # Orchestration des services
-├── .env.example            # Template des secrets
-├── api-gateway/            # Service Node.js
-│   ├── index.js            # Point d'entrée & Routing
-│   ├── Dockerfile          # Image Node Alpine
-│   └── uploads/            # Stockage temporaire (non-gité)
-└── ai-engine/              # Service Python
-    ├── main.py             # Logique FastAPI & Pipeline AI
-    ├── Dockerfile          # Image Python Slim + dépendances système
-    └── requirements.txt    # Libs Python (FastAPI, Whisper, GoogleGenAI)
+├── docker-compose.yml      # Orchestration des services (Node, Python, Postgres)
+├── .env.example            # Documentation des variables d'environnement
+├── api-gateway/            # Service Backend (Node.js/Express)
+│   ├── index.js            # Point d'entrée, Routing & Uploads
+│   ├── prismaClient.js     # Instance unique du client DB
+│   ├── Dockerfile          # Image Node Alpine avec génération Prisma
+│   ├── auth/
+│   │   └── index.js        # Contrôleurs Auth (Login, Signup, Refresh Token)
+│   ├── middleware/
+│   │   └── auth.js         # Sécurité (Vérification JWT Access Token)
+│   ├── prisma/
+│   │   ├── schema.prisma   # Modèles de données (User, RefreshToken)
+│   │   └── migrations/     # Historique des changements SQL
+│   └── uploads/            # Stockage temporaire (non-versionné)
+└── ai-engine/              # Service Intelligence Artificielle (Python)
+    ├── main.py             # API FastAPI : Pipeline Whisper + Gemini
+    ├── Dockerfile          # Image Python Slim + dépendances système (OpenSSL/FFmpeg)
+    └── requirements.txt    # Libs Python (Faster-Whisper, GoogleGenAI)
 ```
 
 ## 🔮 Roadmap & Améliorations Futures
