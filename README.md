@@ -136,8 +136,7 @@ Ce projet est un MVP fonctionnel. Pour passer à l'échelle (Production), les pr
 
 1.  **Queue Asynchrone (Redis/BullMQ)** : Pour ne pas bloquer la requête HTTP pendant le traitement IA (actuellement synchrone).
 2.  **Stockage Cloud (S3)** : Remplacer le stockage local temporaire pour supporter le scaling horizontal.
-3.  **Sécurité** : Ajouter une authentification JWT sur l'API Gateway.
-4.  **CI/CD** : Pipeline GitHub Actions pour les tests automatiques et le linting.
+3.  **CI/CD** : Pipeline GitHub Actions pour les tests automatiques et le linting.
 
 -----
 
