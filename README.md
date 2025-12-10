@@ -1,4 +1,3 @@
-````markdown
 # 🎙️ VoiceCommand API - Intelligent Field Reporting
 
 > **Architecture Microservices hybride (Node.js + Python) pour la structuration automatique de comptes rendus de chantier par IA.**
@@ -144,6 +143,3 @@ Ce projet est un MVP fonctionnel. Pour passer à l'échelle (Production), les pr
 
 **Auteur** : Maxime Kirch
 **Contact** : [maxime.kirch@gmail.com](mailto:maxime.kirch@gmail.com) | [LinkedIn](https://www.linkedin.com/in/maxime-kirch/)
-
-```
-```
