@@ -24,3 +24,23 @@ services:
       - ai-engine
     environment:
       - AI_SERVICE_URL=${AI_SERVICE_URL}
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_ACCESS_SECRET=${JWT_ACCESS_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+
+  # Service 3 : Database
+  db:
+    image: postgres:15-alpine
+    container_name: voice_db
+    restart: always
+    environment:
+      POSTGRES_USER: voice_user
+      POSTGRES_PASSWORD: voice_password
+      POSTGRES_DB: voice_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432" # Optionnel, utile si tu veux inspecter la DB depuis ton PC
+
+volumes:
+  postgres_data:
