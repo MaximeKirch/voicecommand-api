@@ -57,6 +57,9 @@ Ouvrez `.env` et insérez votre clé :
 ```env
 GOOGLE_API_KEY=votre_cle_api_ici
 AI_SERVICE_URL=http://voice_ai_engine:8000
+DATABASE_URL="postgresql://your_user:your_secret_password@db:5432/voice_db?schema=public"
+JWT_ACCESS_SECRET=my_super_long_jwt_access_secret_12345
+JWT_REFRESH_SECRET=my_super_long_jwt_refresh_secret_12345
 ```
 
 ### 3\. Lancer l'architecture
