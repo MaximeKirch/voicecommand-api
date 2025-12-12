@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 
 import google.generativeai as genai
 import typing_extensions as typing
@@ -62,11 +63,13 @@ async def process_audio(file: UploadFile = File(...)):
             temp_filename, beam_size=5, language="fr"
         )
         raw_text = "".join([segment.text for segment in segments]).strip()
+        current_date = datetime.now().strftime("%Y-%m-%d")
 
         # 3. Intelligence (Gemini 2.5 Flash)
         model = genai.GenerativeModel("gemini-2.5-flash")
 
         prompt = f"""
+        CONTEXT TEMPOREL : nous sommes le {current_date}
         Tu es un architecte senior expert en BTP.
         Ton rôle est double :
         1. Extraire les données structurées du chantier.
@@ -91,9 +94,23 @@ async def process_audio(file: UploadFile = File(...)):
             ),
         )
 
+        # Analytics
+        usage = result.usage_metadata
+        prompt_tokens = usage.prompt_token_count
+        output_tokens = usage.candidates_token_count
+        total_tokens = usage.total_token_count
+
         structured_data = json.loads(result.text)
 
-        return {"raw_transcription": raw_text, "structured_report": structured_data}
+        return {
+            "raw_transcription": raw_text,
+            "structured_report": structured_data,
+            "usage": {
+                "prompt_tokens": prompt_tokens,
+                "output_tokens": output_tokens,
+                "total_tokens": total_tokens,
+            },
+        }
 
     except Exception as e:
         print(f"Error AI: {e}")
